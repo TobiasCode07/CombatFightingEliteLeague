@@ -7,6 +7,7 @@ public class Warrior extends Character{
         this.name = name;
         this.health = 100;
         this.strength = 10;
+        this.movementSpeed = 5;
         this.x = startingX;
         this.y = startingY;
         this.facingRight = facingRight;
