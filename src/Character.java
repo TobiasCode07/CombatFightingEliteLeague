@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Character {
+public abstract class Character implements Combat{
     public int health;
     public int strength;
     public String name;
@@ -8,6 +8,9 @@ public abstract class Character {
     public int y;
     public boolean facingRight;
     public int movementSpeed;
+    public int jumpHeight;
+    public int jumpSpeed;
+    public int attackRange;
     static public Color color = new Color(0, 0, 0);
 
     public void drawCharacter(Graphics g) {

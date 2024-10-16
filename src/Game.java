@@ -53,6 +53,34 @@ public class Game extends JPanel implements ActionListener {
         repaint();
     }
 
+    private void jump(Character player) {
+        Timer jumpTimer = new Timer(16, new ActionListener() {
+            private boolean ascending = true;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ascending) {
+                    if (player.y > (Constants.HEIGHT - Constants.CHARACTERSIZE) - player.jumpHeight) {
+                        player.y -= player.jumpSpeed;
+                    } else {
+                        ascending = false;
+                    }
+                } else {
+                    if (player.y < Constants.HEIGHT - Constants.CHARACTERSIZE) {
+                        player.y += player.jumpSpeed;
+                    } else {
+                        ((Timer) e.getSource()).stop();
+                    }
+                }
+                repaint();
+            }
+        });
+
+        jumpTimer.start();
+    }
+
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -67,6 +95,7 @@ public class Game extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (keys[KeyEvent.VK_A]) {
+            player1.facingRight = false;
             if (player1.x - player1.movementSpeed >= 0) {
                 player1.x -= player1.movementSpeed;
             } else {
@@ -74,6 +103,7 @@ public class Game extends JPanel implements ActionListener {
             }
         }
         if (keys[KeyEvent.VK_D]) {
+            player1.facingRight = true;
             if (player1.x + Constants.CHARACTERSIZE + player1.movementSpeed <= Constants.WIDTH) {
                 player1.x += player1.movementSpeed;
             } else {
@@ -82,6 +112,7 @@ public class Game extends JPanel implements ActionListener {
         }
 
         if (keys[KeyEvent.VK_LEFT]) {
+            player2.facingRight = false;
             if (player2.x - player2.movementSpeed >= 0) {
                 player2.x -= player2.movementSpeed;
             } else {
@@ -89,11 +120,28 @@ public class Game extends JPanel implements ActionListener {
             }
         }
         if (keys[KeyEvent.VK_RIGHT]) {
+            player2.facingRight = true;
             if (player2.x + Constants.CHARACTERSIZE + player2.movementSpeed <= Constants.WIDTH) {
                 player2.x += player2.movementSpeed;
             } else {
                 player2.x = Constants.WIDTH - Constants.CHARACTERSIZE;
             }
+        }
+        if (keys[KeyEvent.VK_W]) {
+            if (player1.y + Constants.CHARACTERSIZE == Constants.HEIGHT){
+                jump(player1);
+            }
+        }
+        if (keys[KeyEvent.VK_UP]) {
+            if (player2.y + Constants.CHARACTERSIZE == Constants.HEIGHT){
+                jump(player2);
+            }
+        }
+        if (keys[KeyEvent.VK_T]) {
+            player1.attack(player2); // TODO attack fix
+        }
+        if (keys[KeyEvent.VK_NUMPAD1]) {
+            player2.attack(player1);
         }
 
         repaint();
