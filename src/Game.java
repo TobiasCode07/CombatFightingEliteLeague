@@ -137,11 +137,19 @@ public class Game extends JPanel implements ActionListener {
                 jump(player2);
             }
         }
-        if (keys[KeyEvent.VK_T]) {
-            player1.attack(player2); // TODO attack fix
+        if (keys[KeyEvent.VK_SPACE]) {
+            if (player1.canAttack){
+                player1.attack(player2);
+                player1.canAttack = false;
+                player1.attackTimeout();
+            }
         }
-        if (keys[KeyEvent.VK_NUMPAD1]) {
-            player2.attack(player1);
+        if (keys[KeyEvent.VK_NUMPAD0]) {
+            if (player2.canAttack){
+                player2.attack(player1);
+                player2.canAttack = false;
+                player2.attackTimeout();
+            }
         }
 
         repaint();
