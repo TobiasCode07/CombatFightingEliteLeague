@@ -1,6 +1,8 @@
+import java.awt.*;
+
 public abstract class Constants {
-    static final public int WIDTH = 1000;
-    static final public int HEIGHT = 500;
+    static final public int WIDTH = 700;
+    static final public int HEIGHT = 300;
     static final public String TITLE = "Combat Fighting Elite League";
     static final public String ICON = "/images/icon.jpg";
     static final public int CHARACTERSIZE = 50;
@@ -13,4 +15,6 @@ public abstract class Constants {
     static final public int STARTINGY1 = HEIGHT - CHARACTERSIZE;
     static final public int STARTINGX2 = WIDTH - CHARACTERSIZE;
     static final public int STARTINGY2 = HEIGHT - CHARACTERSIZE;
+    static final public Color attackReadyNickColor = new Color(0, 153, 0);
+    static final public String gameOverText = "Game Over";
 }
