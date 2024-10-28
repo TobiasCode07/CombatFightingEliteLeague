@@ -14,16 +14,9 @@ public class Game extends JPanel implements ActionListener {
     public Game() {
         Window window = new Window();
         window.window.add(this);
-        Character player1 = new Archer("Leon", Constants.STARTINGX1, Constants.STARTINGY1, true);
-        Character player2 = new Assassin("Tobiasz", Constants.STARTINGX2, Constants.STARTINGY2, false);
+        Character player1 = new Archer("Liściak", Constants.STARTINGX1, Constants.STARTINGY1, true);
+        Character player2 = new Assassin("olek", Constants.STARTINGX2, Constants.STARTINGY2, false);
         startGame(player1, player2);
-
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                handleMousePressed(e);
-            }
-        });
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -41,12 +34,6 @@ public class Game extends JPanel implements ActionListener {
 
         timer = new Timer(16, this); // Approximately 60 FPS
         timer.start();
-    }
-
-    private void handleMousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        System.out.println("x: " + x + " y: " + y);
     }
 
     public void startGame(Character player1, Character player2) {
