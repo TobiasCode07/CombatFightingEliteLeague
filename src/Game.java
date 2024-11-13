@@ -12,11 +12,16 @@ public class Game extends JPanel implements ActionListener {
     private boolean[] keys = new boolean[256];
 
     public Game() {
-        Window window = new Window();
-        window.window.add(this);
-        Character player1 = new Archer("Liściak", Constants.STARTINGX1, Constants.STARTINGY1, true);
-        Character player2 = new Assassin("olek", Constants.STARTINGX2, Constants.STARTINGY2, false);
-        startGame(player1, player2);
+        MenuWindow menuWindow = new MenuWindow(this);
+    }
+
+    public void startGame(String name1, String name2, String character1, String character2) {
+        GameWindow gameWindow = new GameWindow();
+        gameWindow.window.add(this);
+        Character player1 = new Archer(name1, Constants.STARTINGX1, Constants.STARTINGY1, true);
+        Character player2 = new Giant(name2, Constants.STARTINGX2, Constants.STARTINGY2, false);
+        this.player1 = player1;
+        this.player2 = player2;
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -34,11 +39,7 @@ public class Game extends JPanel implements ActionListener {
 
         timer = new Timer(16, this); // Approximately 60 FPS
         timer.start();
-    }
 
-    public void startGame(Character player1, Character player2) {
-        this.player1 = player1;
-        this.player2 = player2;
         repaint();
     }
 
@@ -49,13 +50,13 @@ public class Game extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (ascending) {
-                    if (player.y > (Constants.HEIGHT - Constants.CHARACTERSIZE) - player.jumpHeight) {
+                    if (player.y > (Constants.GAMEHEIGHT - Constants.CHARACTERSIZE) - player.jumpHeight) {
                         player.y -= player.jumpSpeed;
                     } else {
                         ascending = false;
                     }
                 } else {
-                    if (player.y < Constants.HEIGHT - Constants.CHARACTERSIZE) {
+                    if (player.y < Constants.GAMEHEIGHT - Constants.CHARACTERSIZE) {
                         player.y += player.jumpSpeed;
                     } else {
                         ((Timer) e.getSource()).stop();
@@ -83,8 +84,8 @@ public class Game extends JPanel implements ActionListener {
             FontMetrics gameTextMetrics = g.getFontMetrics(g.getFont());
             int gameTextWidth = gameTextMetrics.stringWidth(Constants.gameOverText);
             int gameTextHeight = gameTextMetrics.getHeight();
-            int gameTextX = (Constants.WIDTH / 2) - gameTextWidth / 2;
-            int gameTextY = ((Constants.HEIGHT / 6) * 2) - gameTextHeight / 2;
+            int gameTextX = (Constants.GAMEWIDTH / 2) - gameTextWidth / 2;
+            int gameTextY = ((Constants.GAMEHEIGHT / 6) * 2) - gameTextHeight / 2;
             g.drawString(Constants.gameOverText, gameTextX, gameTextY);
 
             g.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -92,8 +93,8 @@ public class Game extends JPanel implements ActionListener {
             String message = winner.name + " won!";
             int subTextWidth = subTextMetrics.stringWidth(message);
             int subTextHeight = subTextMetrics.getHeight();
-            int subTextX = (Constants.WIDTH / 2) - subTextWidth / 2;
-            int subTextY = ((Constants.HEIGHT / 6) * 3) - subTextHeight / 2;
+            int subTextX = (Constants.GAMEWIDTH / 2) - subTextWidth / 2;
+            int subTextY = ((Constants.GAMEHEIGHT / 6) * 3) - subTextHeight / 2;
             g.drawString(message, subTextX, subTextY);
         }
     }
@@ -111,10 +112,10 @@ public class Game extends JPanel implements ActionListener {
             }
             if (keys[KeyEvent.VK_D]) {
                 player1.facingRight = true;
-                if (player1.x + Constants.CHARACTERSIZE + player1.movementSpeed <= Constants.WIDTH) {
+                if (player1.x + Constants.CHARACTERSIZE + player1.movementSpeed <= Constants.GAMEWIDTH) {
                     player1.x += player1.movementSpeed;
                 } else {
-                    player1.x = Constants.WIDTH - Constants.CHARACTERSIZE;
+                    player1.x = Constants.GAMEWIDTH - Constants.CHARACTERSIZE;
                 }
             }
 
@@ -128,19 +129,19 @@ public class Game extends JPanel implements ActionListener {
             }
             if (keys[KeyEvent.VK_RIGHT]) {
                 player2.facingRight = true;
-                if (player2.x + Constants.CHARACTERSIZE + player2.movementSpeed <= Constants.WIDTH) {
+                if (player2.x + Constants.CHARACTERSIZE + player2.movementSpeed <= Constants.GAMEWIDTH) {
                     player2.x += player2.movementSpeed;
                 } else {
-                    player2.x = Constants.WIDTH - Constants.CHARACTERSIZE;
+                    player2.x = Constants.GAMEWIDTH - Constants.CHARACTERSIZE;
                 }
             }
             if (keys[KeyEvent.VK_W]) {
-                if (player1.y + Constants.CHARACTERSIZE == Constants.HEIGHT) {
+                if (player1.y + Constants.CHARACTERSIZE == Constants.GAMEHEIGHT) {
                     jump(player1);
                 }
             }
             if (keys[KeyEvent.VK_UP]) {
-                if (player2.y + Constants.CHARACTERSIZE == Constants.HEIGHT) {
+                if (player2.y + Constants.CHARACTERSIZE == Constants.GAMEHEIGHT) {
                     jump(player2);
                 }
             }

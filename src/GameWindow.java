@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class Window {
+public class GameWindow {
     public JFrame window;
 
-    public Window(){
-        window = new JFrame(Constants.TITLE);
-        window.setSize(Constants.WIDTH, Constants.HEIGHT);
+    public GameWindow(){
+        window = new JFrame(Constants.GAMETITLE);
+        window.setSize(Constants.GAMEWIDTH, Constants.GAMEHEIGHT);
         window.setLocationRelativeTo(null);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,8 +18,8 @@ public class Window {
     }
     private void adjustWindowSize(){
         Insets insets = window.getInsets();
-        int adjustedWidth = Constants.WIDTH + insets.left + insets.right;
-        int adjustedHeight = Constants.HEIGHT + insets.top + insets.bottom;
+        int adjustedWidth = Constants.GAMEWIDTH + insets.left + insets.right;
+        int adjustedHeight = Constants.GAMEHEIGHT + insets.top + insets.bottom;
         window.setSize(adjustedWidth, adjustedHeight);
     }
 }
