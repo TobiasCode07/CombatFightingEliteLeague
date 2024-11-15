@@ -12,16 +12,16 @@ public class Game extends JPanel implements ActionListener {
     private boolean[] keys = new boolean[256];
 
     public Game() {
-        MenuWindow menuWindow = new MenuWindow(this);
+        new MenuWindow(this);
     }
 
-    public void startGame(String name1, String name2, String character1, String character2) {
+    public void startGame(String name1, String name2, Characters character1, Characters character2) {
         GameWindow gameWindow = new GameWindow();
         gameWindow.window.add(this);
-        Character player1 = new Archer(name1, Constants.STARTINGX1, Constants.STARTINGY1, true);
-        Character player2 = new Giant(name2, Constants.STARTINGX2, Constants.STARTINGY2, false);
-        this.player1 = player1;
-        this.player2 = player2;
+
+        System.out.println(character1.name());
+        this.player1 = createPlayer(name1, character1, Constants.STARTINGX1, Constants.STARTINGY1, true);
+        this.player2 = createPlayer(name2, character2, Constants.STARTINGX2, Constants.STARTINGY2, false);
 
         addKeyListener(new KeyAdapter() {
             @Override
@@ -42,6 +42,16 @@ public class Game extends JPanel implements ActionListener {
 
         repaint();
     }
+
+    private Character createPlayer(String name, Characters character, int startingX, int startingY, boolean facingRight) {
+        return switch (character) {
+            case Warrior -> new Warrior(name, startingX, startingY, facingRight);
+            case Archer -> new Archer(name, startingX, startingY, facingRight);
+            case Giant -> new Giant(name, startingX, startingY, facingRight);
+            case Assassin -> new Assassin(name, startingX, startingY, facingRight);
+        };
+    }
+
 
     private void jump(Character player) {
         Timer jumpTimer = new Timer(16, new ActionListener() {

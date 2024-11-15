@@ -11,8 +11,7 @@ public class GameWindow {
         window.setLocationRelativeTo(null);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Image icon = new ImageIcon(Objects.requireNonNull(Main.class.getResource(Constants.ICON))).getImage();
-        window.setIconImage(icon);
+        window.setIconImage(Constants.ICON);
         window.setVisible(true);
         adjustWindowSize();
     }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class MenuWindow extends JFrame {
     private JTextField player1NameField;
@@ -10,13 +11,19 @@ public class MenuWindow extends JFrame {
     private JComboBox<String> player2CharacterBox;
     private JButton startButton;
 
-    private String[] characters = {"Warrior", "Giant", "Archer", "Assassin"};
+    private String[] characters = Arrays.stream(Characters.values())
+            .map(Enum::name)
+            .toArray(String[]::new);
+
+    private Characters[] charactersEnum = Characters.values();
 
     public MenuWindow(Game game) {
         setTitle("Game Setup");
-        setSize(Constants.GAMEWIDTH, Constants.GAMEHEIGHT);
+        setSize(Constants.MENUWIDTH, Constants.MENUHEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        setResizable(false);
+        setIconImage(Constants.ICON);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 2, 10, 10));
@@ -54,15 +61,20 @@ public class MenuWindow extends JFrame {
     private void startGame(Game game) {
         String player1Name = player1NameField.getText();
         String player2Name = player2NameField.getText();
-        String player1Character = (String) player1CharacterBox.getSelectedItem();
-        String player2Character = (String) player2CharacterBox.getSelectedItem();
+        Characters player1Character = charactersEnum[player1CharacterBox.getSelectedIndex()];
+        Characters player2Character = charactersEnum[player2CharacterBox.getSelectedIndex()];
 
         if (player1Name.isEmpty() || player2Name.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Enter both players names", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            dispose();
-            game.startGame(player1Name, player2Name, player1Character, player2Character);
+            if (player1Name.length() > 10 || player2Name.length() > 10) {
+                JOptionPane.showMessageDialog(this, "Names must be up to 10 characters", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                dispose();
+                game.startGame(player1Name, player2Name, player1Character, player2Character);
+            }
         }
     }
 }
