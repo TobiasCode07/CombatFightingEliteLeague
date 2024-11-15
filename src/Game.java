@@ -19,7 +19,6 @@ public class Game extends JPanel implements ActionListener {
         GameWindow gameWindow = new GameWindow();
         gameWindow.window.add(this);
 
-        System.out.println(character1.name());
         this.player1 = createPlayer(name1, character1, Constants.STARTINGX1, Constants.STARTINGY1, true);
         this.player2 = createPlayer(name2, character2, Constants.STARTINGX2, Constants.STARTINGY2, false);
 

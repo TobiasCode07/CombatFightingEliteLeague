@@ -13,6 +13,8 @@ public abstract class Character implements Drawing {
     int jumpHeight;
     int jumpSpeed;
     int attackRange;
+    Image weaponL;
+    Image weaponR;
     Color color = new Color(0, 0, 0);
 
     void attack(Character enemy) {

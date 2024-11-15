@@ -9,6 +9,7 @@ public abstract class Constants {
     static final public int MENUHEIGHT = 300;
     static final public String GAMETITLE = "Combat Fighting Elite League";
     static final public String ICONPATH = "/images/icon.jpg";
+    static final public String WEAPONSPATH = "/images/weapons/";
     static final public Image ICON = new ImageIcon(Objects.requireNonNull(Main.class.getResource(ICONPATH))).getImage();
     static final public int CHARACTERSIZE = 50;
     static final public int EYESIZE = 10;

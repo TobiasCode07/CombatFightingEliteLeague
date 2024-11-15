@@ -72,8 +72,13 @@ public class MenuWindow extends JFrame {
                 JOptionPane.showMessageDialog(this, "Names must be up to 10 characters", "Error", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                dispose();
-                game.startGame(player1Name, player2Name, player1Character, player2Character);
+                if (player1Name.equals(player2Name)) {
+                    JOptionPane.showMessageDialog(this, "Names must be different", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    dispose();
+                    game.startGame(player1Name, player2Name, player1Character, player2Character);
+                }
             }
         }
     }
