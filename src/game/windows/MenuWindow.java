@@ -1,3 +1,9 @@
+package game.windows;
+
+import game.Constants;
+import game.Game;
+import game.characters.Characters;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,14 @@
+package game.characters;
+
+import game.Constants;
+import game.Drawing;
+import game.Main;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class Assassin extends Character implements Drawing{
+public class Assassin extends Character implements Drawing {
     public Assassin(String name, int startingX, int startingY, boolean facingRight) {
         this.name = name;
         this.health = 70;

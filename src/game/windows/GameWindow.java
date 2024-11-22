@@ -1,6 +1,8 @@
+package game.windows;
+
+import game.Constants;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class GameWindow {
     public JFrame window;

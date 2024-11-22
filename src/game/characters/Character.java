@@ -1,3 +1,8 @@
+package game.characters;
+
+import game.Constants;
+import game.Drawing;
+
 import java.awt.*;
 
 public abstract class Character implements Drawing {
@@ -12,12 +17,133 @@ public abstract class Character implements Drawing {
     int movementSpeed;
     int jumpHeight;
     int jumpSpeed;
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public boolean isFacingRight() {
+        return facingRight;
+    }
+
+    public void setFacingRight(boolean facingRight) {
+        this.facingRight = facingRight;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    public int getAttackTimeout() {
+        return attackTimeout;
+    }
+
+    public void setAttackTimeout(int attackTimeout) {
+        this.attackTimeout = attackTimeout;
+    }
+
+    public int getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(int movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public int getJumpHeight() {
+        return jumpHeight;
+    }
+
+    public void setJumpHeight(int jumpHeight) {
+        this.jumpHeight = jumpHeight;
+    }
+
+    public int getJumpSpeed() {
+        return jumpSpeed;
+    }
+
+    public void setJumpSpeed(int jumpSpeed) {
+        this.jumpSpeed = jumpSpeed;
+    }
+
+    public int getAttackRange() {
+        return attackRange;
+    }
+
+    public void setAttackRange(int attackRange) {
+        this.attackRange = attackRange;
+    }
+
+    public Image getWeaponL() {
+        return weaponL;
+    }
+
+    public void setWeaponL(Image weaponL) {
+        this.weaponL = weaponL;
+    }
+
+    public Image getWeaponR() {
+        return weaponR;
+    }
+
+    public void setWeaponR(Image weaponR) {
+        this.weaponR = weaponR;
+    }
+
     int attackRange;
     Image weaponL;
     Image weaponR;
     Color color = new Color(0, 0, 0);
 
-    void attack(Character enemy) {
+    public void attack(Character enemy) {
         if (facingRight){
             if ((enemy.x - (this.x + Constants.CHARACTERSIZE) <= this.attackRange && enemy.x - (this.x + Constants.CHARACTERSIZE) >= -Constants.CHARACTERSIZE * 0.4)
                     && (Math.abs(enemy.y - this.y) <= Constants.CHARACTERSIZE / 2 || Math.abs(this.y - enemy.y) <= Constants.CHARACTERSIZE / 2 )){
@@ -59,7 +185,7 @@ public abstract class Character implements Drawing {
         g.drawString(text, textX, textY);
     }
 
-    void attackTimeout() {
+    public void attackTimeout() {
         Thread attackTimeout = new Thread(() -> {
             try {
                 Thread.sleep(this.attackTimeout);
